@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="author" content="DIVSIG UGM" />
+  <meta name="description" content="leaflet basic" />
+
+  <!--titler-->
+  <title>Potensi Kebencanan Desa Bagik Polak</title>
+
+  <!--leafllet JS-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+  <!--bootsrap-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+    integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!--button search-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+  <!-- Leaflet Measure CSS Library -->
+  <link rel="stylesheet" href="Asset/plugins/leaflet-measure/leaflet-measure.css" />
+
+  <!-- Search CSS Library -->
+  <link rel="stylesheet" href="Asset/plugins/leaflet-search/leaflet-search.css" />
+
+  <!-- Geolocation CSS Library for Plugin -->
+  <link rel="stylesheet"
+    href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css" />
+
+  <!-- Leaflet Mouse Position CSS Library -->
+  <link rel="stylesheet" href="Asset/plugins/leaflet-mouseposition/L.Control.MousePosition.css" />
+
+  <!-- EasyPrint CSS Library -->
+  <link rel="stylesheet" href="Asset/plugins/leaflet-easyprint/easyPrint.css" />
+
+  <!--Routing CSS Library-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+  <!-- Tab browser icon -->
+  <link rel="icon" type="image/x-icon" href="http://luk.staff.ugm.ac.id/logo/UGM/Resmi/Warna.gif" />
+
+  <!--link font-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Lato&family=Roboto+Mono:wght@700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+    integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="p-1 mb-2 bg-light border">
+            <div class="panel panel-default">
+              <div class="p-1 mb-2 border text-center text-success">
+                <span class="badge text-bg-success fw-semibold fs-6 font-monospace"
+                  style="color: #000; font-size: 50px">Peta Potensi Bencana Desa Bagik Polak</span>
+              </div>
+              <div id="map"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Information Section -->
+
+        <div class="col-md-3">
+          <div>
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+              <!-- Administrasi Wilayah -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                    aria-controls="panelsStayOpen-collapseOne">
+                    Administrasi Wilayah
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Batas Desa Bagik Polak
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Jalan -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseTwo">
+                    Jalan
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="JalanLokal" checked />
+                      <label class="form-check-label" for="JalanLokal">
+                        Jalan Lokal
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="JalanLain" checked />
+                      <label class="form-check-label" for="JalanLain">
+                        Jalan Lain
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="JalanGang" checked />
+                      <label class="form-check-label" for="JalanGang">
+                        Jalan Gang
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="JalanPerumahan" checked />
+                      <label class="form-check-label" for="JalanPerumahan">
+                        Jalan Perumahan
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Rencana Evakuasi -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseThree">
+                    Rencana Evakuasi
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="JalurEvakuasi" checked />
+                      <label class="form-check-label" for="JalurEvakuasi">
+                        Jalur Evakuasi
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="TitikAkhir" checked />
+                      <label class="form-check-label" for="TitikAkhir">
+                        Tempat Evakuasi Akhir
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="TitikSementara" checked />
+                      <label class="form-check-label" for="TitikSementara">
+                        Tempat Evakuasi Sementara
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Bahaya -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseFour">
+                    Bahaya Bencana
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="BahayaBanjir" />
+                      <label class="form-check-label" for="BahayaBanjir">
+                        Bahaya Banjir
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="BahayaCuaca" />
+                      <label class="form-check-label" for="BahayaCuaca">
+                        Bahaya Cuaca Ekstrem
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="BahayaGempa" />
+                      <label class="form-check-label" for="BahayaGempa">
+                        Bahaya Gempa Bumi
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="BahayaKekeringan" />
+                      <label class="form-check-label" for="BahayaKekeringan">
+                        Bahaya Kekeringan
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="BahayaTsunami" />
+                      <label class="form-check-label" for="BahayaTsunami">
+                        Bahaya Tsunami
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Kerentanan -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseFive">
+                    Kerentanan Bencana
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="KerentananBanjir" />
+                      <label class="form-check-label" for="KerentananBanjir">
+                        Kerentanan Banjir
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="KerentananCuaca" />
+                      <label class="form-check-label" for="KerentananCuaca">
+                        Kerentanan Cuaca Ekstrem
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="KerentananGempa" />
+                      <label class="form-check-label" for="KerentananGempa">
+                        Kerentanan Gempa Bumi
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="KerentananKekeringan" />
+                      <label class="form-check-label" for="KerentananKekeringan">
+                        Kerentanan Kekeringan
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="KerentananTsunami" />
+                      <label class="form-check-label" for="KerentananTsunami">
+                        Kerentanan Tsunami
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Resiko-->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseSix">
+                    Resiko Bencana
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="ResikoBanjir" />
+                      <label class="form-check-label" for="ResikoBanjir">
+                        Resiko Banjir
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="ResikoCuaca" />
+                      <label class="form-check-label" for="ResikoCuaca">
+                        Resiko Cuaca Ekstrem
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="ResikoGempa" />
+                      <label class="form-check-label" for="ResikoGempa">
+                        Resiko Gempa Bumi
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="ResikoKekeringan" />
+                      <label class="form-check-label" for="ResikoKekeringan">
+                        Resiko Kekeringan
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="ResikoTsunami" />
+                      <label class="form-check-label" for="ResikoTsunami">
+                        Resiko Tsunami
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fasilitas-->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseSeven">
+                    Fasilitas Desa
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="FasilitasMasjid" />
+                      <label class="form-check-label" for="FasilitasMasjid">
+                        Masjid
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="FasilitasSekolah" />
+                      <label class="form-check-label" for="FasilitasSekolah">
+                        Sekolah
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="FasilitasKesehatan" checked />
+                      <label class="form-check-label" for="FasilitasKesehatan">
+                        Fasilitas Ksehatan
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="MCKUmum" checked />
+                      <label class="form-check-label" for="MCKUmum"">
+                          MCK Umum
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add more information as needed -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Leaflet JS-->
+    <script src=" https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+                        <!--bootsrap-->
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
+                          integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="
+                          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+                        <!-- Leaflet Measure JavaScript Library -->
+                        <script src="Asset/plugins/leaflet-measure/leaflet-measure.js"></script>
+
+                        <!-- Search JavaScript Library -->
+                        <script src="Asset/plugins/leaflet-search/leaflet-search.js"></script>
+
+                        <!-- Geolocation Javascript Library -->
+                        <script
+                          src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
+
+                        <!-- Leaflet Mouse Position JavaScript Library -->
+                        <script src="Asset/plugins/leaflet-mouseposition/L.Control.MousePosition.js"></script>
+
+                        <!-- EasyPrint JavaScript Library -->
+                        <script src="Asset/plugins/leaflet-easyprint/leaflet.easyPrint.js"></script>
+
+                        <!--Routing JavaScript Library-->
+                        <script
+                          src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+                        <script
+                          src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
+
+                        <!--g-->
+                        <script language="JavaScript" type="text/javascript"
+                          src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                        <!--Geocode dan marker cluster-->
+                        <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+                        <script src="./dist/leaflet.markercluster.js"></script>
+</body>
+
+</html>
+<script src="data/Bahaya_Banjir.geojson"></script>
+<script src="data/Admin_Desa_Bagik_Polak.geojson"></script>
+<script src="data/Bahaya_CuacaEkstrem.geojson"></script>
+<script src="data/bahaya_gempabumi.geojson"></script>
+<script src="data/bahaya_kekeringan.geojson"></script>
+<script src="data/bahaya_tsunami.geojson"></script>
+<script src="data/kerentanan_banjir.geojson"></script>
+<script src="data/kerentanan_cuacaekstrem.geojson"></script>
+<script src="data/kerentanan_gempa.geojson"></script>
+<script src="data/kerentanan_kekeringan.geojson"></script>
+<script src="data/kerentanan_tsunami.geojson"></script>
+<script src="data/resiko_banjir.geojson"></script>
+<script src="data/resiko_cuacaekstrem.geojson"></script>
+<script src="data/resiko_gempabumi.geojson"></script>
+<script src="data/resiko_kekeringan.geojson"></script>
+<script src="data/resiko_tsunami.geojson"></script>
+<script src="data/Titik Kumpul Sementara.geojson"></script>
+<script src="data/Titik Kumpul Akhir.geojson"></script>
+<script src="data/Jalur Evakuasi.geojson"></script>
+<script src="data/Fas_Masjid.geojson"></script>
+<script src="data/Fas_Sekolah.geojson"></script>
+<script src="data/Fas_Kesehatan.geojson"></script>
+<script src="data/MCK_Umum.geojson"></script>
+<script src="data/Gang_Bagik_Polak.geojson"></script>
+<script src="data/Jalan_Lain_BagikPolak.geojson"></script>
+<script src="data/Jalan_Lokal_BagikPolak.geojson"></script>
+<script src="data/Jalan_Perumahan_BagikPolak.geojson"></script>
+
+<script>
+  //Layer OSM
+
+  var map = L.map("map").setView([-8.627266140997959, 116.13555872405716], 16);
+  var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  });
+
+  var CartoDB_DarkMatter = L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: "abcd",
+      maxZoom: 19,
+    }
+  );
+
+  // Google Map Layer
+
+  googleStreets = L.tileLayer(
+    "http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+    {
+      maxZoom: 20,
+      subdomains: ["mt0", "mt1", "mt2", "mt3"],
+    }
+  );
+
+  // Satelite Layer
+  googleSat = L.tileLayer("http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
+    maxZoom: 20,
+    subdomains: ["mt0", "mt1", "mt2", "mt3"],
+  });
+  googleSat.addTo(map);
+
+  var Stamen_Watercolor = L.tileLayer(
+    "https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}",
+    {
+      attribution:
+        'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      subdomains: "abcd",
+      minZoom: 1,
+      maxZoom: 16,
+      ext: "jpg",
+    }
+  );
+
+  //Layer control
+
+  var baseMaps = {
+    Satellite: googleSat,
+    "Google Map": googleStreets,
+    "Water Color": Stamen_Watercolor,
+    OpenStreetMap: osm,
+    DarkMatter: CartoDB_DarkMatter,
+  };
+
+  L.control.layers(baseMaps).addTo(map);
+
+  // Admin Desa Bagik Polak
+  var checkbox = document.getElementById("flexCheckDefault");
+  checkbox.addEventListener("change", function () {
+    if (checkbox.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      admin_bagikpolak.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(admin_bagikpolak);
+    }
+  });
+
+  // Titik  Akhir
+  var checkbox18 = document.getElementById("JalurEvakuasi");
+  checkbox18.addEventListener("change", function () {
+    if (checkbox18.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      jalurevakuasi.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(jalurevakuasi);
+    }
+  });
+
+  // Bahaya Banjir
+  var checkbox1 = document.getElementById("BahayaBanjir");
+  checkbox1.addEventListener("change", function () {
+    if (checkbox1.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      bahaya_banjir.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(bahaya_banjir);
+    }
+  });
+  // Bahaya Cuaca Ekstrem
+  var checkbox2 = document.getElementById("BahayaCuaca");
+  checkbox2.addEventListener("change", function () {
+    if (checkbox2.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      bahaya_cuacaekstrem.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(bahaya_cuacaekstrem);
+    }
+  });
+
+  // Bahaya Gempa
+  var checkbox3 = document.getElementById("BahayaGempa");
+  checkbox3.addEventListener("change", function () {
+    if (checkbox3.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      bahaya_gempa.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(bahaya_gempa);
+    }
+  });
+
+  // Bahaya Kekeringan
+  var checkbox4 = document.getElementById("BahayaKekeringan");
+  checkbox4.addEventListener("change", function () {
+    if (checkbox4.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      bahaya_kekeringan.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(bahaya_kekeringan);
+    }
+  });
+
+  // Bahaya tsunami
+  var checkbox5 = document.getElementById("BahayaTsunami");
+  checkbox5.addEventListener("change", function () {
+    if (checkbox5.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      bahaya_tsunami.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(bahaya_tsunami);
+    }
+  });
+
+  // Kerentanan Banjir
+  var checkbox6 = document.getElementById("KerentananBanjir");
+  checkbox6.addEventListener("change", function () {
+    if (checkbox6.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      kerentanan_banjir.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(kerentanan_banjir);
+    }
+  });
+
+  // Kerentanan Cuaca
+  var checkbox7 = document.getElementById("KerentananCuaca");
+  checkbox7.addEventListener("change", function () {
+    if (checkbox7.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      kerentanan_cuaca.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(kerentanan_cuaca);
+    }
+  });
+
+  // Kerentanan Gempa
+  var checkbox8 = document.getElementById("KerentananGempa");
+  checkbox8.addEventListener("change", function () {
+    if (checkbox8.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      kerentanan_gempa.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(kerentanan_gempa);
+    }
+  });
+
+  // Kerentanan Kekeringan
+  var checkbox9 = document.getElementById("KerentananKekeringan");
+  checkbox9.addEventListener("change", function () {
+    if (checkbox9.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      kerentanan_kekeringan.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(kerentanan_kekeringan);
+    }
+  });
+
+  // Kerentanan Tsunami
+  var checkbox10 = document.getElementById("KerentananTsunami");
+  checkbox10.addEventListener("change", function () {
+    if (checkbox10.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      kerentanan_tsunami.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(kerentanan_tsunami);
+    }
+  });
+
+  // Resiko Banjir
+  var checkbox11 = document.getElementById("ResikoBanjir");
+  checkbox11.addEventListener("change", function () {
+    if (checkbox11.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      resiko_banjir.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(resiko_banjir);
+    }
+  });
+
+  // Resiko Cuaca Ekstrem
+  var checkbox12 = document.getElementById("ResikoCuaca");
+  checkbox12.addEventListener("change", function () {
+    if (checkbox12.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      cuaca_ekstrem.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(cuaca_ekstrem);
+    }
+  });
+
+  // Resiko Gempa Bumi
+  var checkbox13 = document.getElementById("ResikoGempa");
+  checkbox13.addEventListener("change", function () {
+    if (checkbox13.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      resiko_gempa.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(resiko_gempa);
+    }
+  });
+
+  // Resiko Kekeringan
+  var checkbox14 = document.getElementById("ResikoKekeringan");
+  checkbox14.addEventListener("change", function () {
+    if (checkbox14.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      resiko_kekeringan.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(resiko_kekeringan);
+    }
+  });
+
+  // Resiko Kekeringan
+  var checkbox15 = document.getElementById("ResikoTsunami");
+  checkbox15.addEventListener("change", function () {
+    if (checkbox15.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      resiko_tsunami.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(resiko_tsunami);
+    }
+  });
+
+  // Titik  Kumpul Sementara
+  var checkbox16 = document.getElementById("TitikSementara");
+  checkbox16.addEventListener("change", function () {
+    if (checkbox16.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      titik_sementara.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(titik_sementara);
+    }
+  });
+
+  // Titik  Akhir
+  var checkbox17 = document.getElementById("TitikAkhir");
+  checkbox17.addEventListener("change", function () {
+    if (checkbox17.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      titikakhir.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(titikakhir);
+    }
+  });
+
+
+
+  // Fasilitas Masjid
+  var checkbox19 = document.getElementById("FasilitasMasjid");
+  checkbox19.addEventListener("change", function () {
+    if (checkbox19.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Fas_Masjid.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Fas_Masjid);
+    }
+  });
+
+  // Fasilitas Sekolah
+  var checkbox20 = document.getElementById("FasilitasSekolah");
+  checkbox20.addEventListener("change", function () {
+    if (checkbox20.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Fas_Sekolah.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Fas_Sekolah);
+    }
+  });
+
+  // Fasilitas Sekolah
+  var checkbox21 = document.getElementById("FasilitasKesehatan");
+  checkbox21.addEventListener("change", function () {
+    if (checkbox21.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Fas_Kesehatan.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Fas_Kesehatan);
+    }
+  });
+
+  // Fasilitas MCK Umum
+  var checkbox22 = document.getElementById("MCKUmum");
+  checkbox22.addEventListener("change", function () {
+    if (checkbox22.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      MCK_Umum.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(MCK_Umum);
+    }
+  });
+
+  // Jalan Gang
+  var checkbox23 = document.getElementById("JalanGang");
+  checkbox23.addEventListener("change", function () {
+    if (checkbox23.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Jalan_Gang.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Jalan_Gang);
+    }
+  });
+
+  // Jalan Lain
+  var checkbox24 = document.getElementById("JalanLain");
+  checkbox24.addEventListener("change", function () {
+    if (checkbox24.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Jalan_Lain.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Jalan_Lain);
+    }
+  });
+
+  // Jalan Lokal
+  var checkbox25 = document.getElementById("JalanLokal");
+  checkbox25.addEventListener("change", function () {
+    if (checkbox25.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Jalan_Lokal.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Jalan_Lokal);
+    }
+  });
+
+  // Jalan Perumahan
+  var checkbox26 = document.getElementById("JalanPerumahan");
+  checkbox26.addEventListener("change", function () {
+    if (checkbox26.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Jalan_Perumahan.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Jalan_Perumahan);
+    }
+  });
+
+  // Menambahkan data administrasi dan mengatur gaya dengan garis tepi putus-putus
+  var admin_bagikpolak = L.geoJSON(admin_bagikpolak, {
+    style: function (feature) {
+      return {
+        fillColor: "transparent",
+        color: "white",
+        weight: 2,
+        dashArray: "5, 5", // Mengatur pola putus-putus
+      };
+    },
+  }).addTo(map);
+
+
+
+  // Menambahkan data banjir
+  var bahaya_banjir = L.geoJSON(bahaya_banjir, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+  // Menambahkan data cuaca ekstrem
+  var bahaya_cuacaekstrem = L.geoJSON(bahaya_cuacaekstrem, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data bahaya gempa bumi
+  var bahaya_gempa = L.geoJSON(bahaya_gempa, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data bahaya kekeringan
+  var bahaya_kekeringan = L.geoJSON(bahaya_kekeringan, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data bahaya kekeringan
+  var bahaya_tsunami = L.geoJSON(bahaya_tsunami, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data kerentanan banjir
+  var kerentanan_banjir = L.geoJSON(kerentanan_banjir, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data kerentanan cuaca
+  var kerentanan_cuaca = L.geoJSON(kerentanan_cuaca, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data kerentanan cuaca
+  var kerentanan_gempa = L.geoJSON(kerentanan_gempa, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data kerentanan cuaca
+  var kerentanan_kekeringan = L.geoJSON(kerentanan_kekeringan, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data kerentanan cuaca
+  var kerentanan_tsunami = L.geoJSON(kerentanan_tsunami, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data kerentanan cuaca
+  var resiko_banjir = L.geoJSON(resiko_banjir, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data resiko banjir
+  var cuaca_ekstrem = L.geoJSON(cuaca_ekstrem, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data resikogempa
+  var resiko_gempa = L.geoJSON(resiko_gempabumi, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data resiko kekeringan
+  var resiko_kekeringan = L.geoJSON(resiko_kekeringan, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  // Menambahkan data resiko tsunami
+  var resiko_tsunami = L.geoJSON(resiko_tsunami, {
+    style: function (feature) {
+      var keterangan = feature.properties.Keterangan;
+      var fillColor;
+
+      // Memilih warna berdasarkan nilai keterangan
+      switch (keterangan) {
+        case "Tinggi":
+          fillColor = "red";
+          break;
+        case "Sedang":
+          fillColor = "yellow";
+          break;
+        case "Rendah":
+          fillColor = "green";
+          break;
+        default:
+          fillColor = "gray"; // Warna default jika tidak ada kecocokan
+      }
+
+      return {
+        fillColor: fillColor,
+        color: "white", // Warna garis tepi
+        weight: 2, // Ketebalan garis tepi
+      };
+    },
+  });
+
+  //Titik Kumpul Sementara
+  var Icon1 = new L.Icon({
+    iconUrl: "Asset/img/marker/gathering.png",
+    iconSize: [23, 23],
+  });
+
+  var titik_sementara = L.geoJSON(titiksementara, {
+    pointToLayer: function (feature, latlng) {
+      var marker = L.marker(latlng, { icon: Icon1 });
+      marker.bindPopup(`
+      <form id="regForm" action="">
+        <h6>${feature.properties.Name}</h6>
+        <table>
+          <tr>
+            <th>Keterangan</th>
+            <td>: ${feature.properties.Keterangan}</td>
+          </tr>
+        </table>
+        <br>
+      </form>
+    `);
+      return marker;
+    },
+  }).addTo(map);
+
+  //Titik Kumpul Akhir
+  var Icon2 = new L.Icon({
+    iconUrl: "Asset/img/marker/assembly-point.png",
+    iconSize: [23, 23],
+  });
+
+  var titikakhir = L.geoJSON(titikakhir, {
+    pointToLayer: function (feature, latlng) {
+      var marker = L.marker(latlng, { icon: Icon2 });
+      marker.bindPopup(`
+      <form id="regForm" action="">
+        <h6>${feature.properties.Name}</h6>
+        <table>
+          <tr>
+            <th>Keterangan</th>
+            <td>: ${feature.properties.Keterangan}</td>
+          </tr>
+        </table>
+        <br>
+      </form>
+    `);
+      return marker;
+    },
+  }).addTo(map);
+
+  //Titik Fasilitas Masjid
+  var Icon3 = new L.Icon({
+    iconUrl: "Asset/img/marker/mosque.png",
+    iconSize: [23, 23],
+  });
+
+  var Fas_Masjid = L.geoJSON(Fas_Masjid, {
+    pointToLayer: function (feature, latlng) {
+      var marker = L.marker(latlng, { icon: Icon3 });
+      return marker;
+    },
+  });
+
+  //Titik Fasilitas Sekolah
+  var Icon4 = new L.Icon({
+    iconUrl: "Asset/img/marker/school.png",
+    iconSize: [23, 23],
+  });
+
+  var Fas_Sekolah = L.geoJSON(Fas_Sekolah, {
+    pointToLayer: function (feature, latlng) {
+      var marker = L.marker(latlng, { icon: Icon4 });
+      return marker;
+    },
+  });
+
+  //Titik Fasilitas Kesehatan
+  var Icon5 = new L.Icon({
+    iconUrl: "Asset/img/marker/hospital.png",
+    iconSize: [23, 23],
+  });
+
+  var Fas_Kesehatan = L.geoJSON(Fas_Kesehatan, {
+    pointToLayer: function (feature, latlng) {
+      var marker = L.marker(latlng, { icon: Icon5 });
+      return marker;
+    },
+  }).addTo(map);
+
+  //Titik MCK Umum
+  var Icon6 = new L.Icon({
+    iconUrl: "Asset/img/marker/toilet.png",
+    iconSize: [23, 23],
+  });
+
+  var MCK_Umum = L.geoJSON(MCK_Umum, {
+    pointToLayer: function (feature, latlng) {
+      var marker = L.marker(latlng, { icon: Icon6 });
+      return marker;
+    },
+  }).addTo(map);
+
+
+  // Menambahkan data gang
+  var Jalan_Gang = L.geoJSON(Jalan_Gang, {
+    style: {
+      color: "red", // Warna garis
+      weight: 2, // Ketebalan garis
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  Jalan_Gang.addTo(map);
+
+
+  // Menambahkan data jalan lain
+  var Jalan_Lain = L.geoJSON(Jalan_Lain, {
+    style: {
+      color: "red", // Warna garis
+      weight: 2, // Ketebalan garis
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  Jalan_Lain.addTo(map);
+
+  // Menambahkan data jalan Lokal
+  var Jalan_Lokal = L.geoJSON(Jalan_Lokal, {
+    style: {
+      color: "red", // Warna garis
+      weight: 2, // Ketebalan garis
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  Jalan_Lokal.addTo(map);
+
+  // Menambahkan data jalan Perumahan
+  var Jalan_Perumahan = L.geoJSON(Jalan_Perumahan, {
+    style: {
+      color: "red", // Warna garis
+      weight: 2, // Ketebalan garis
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  Jalan_Perumahan.addTo(map);
+
+  // Menambahkan data resiko tsunami (data line)
+  var jalurevakuasi = L.geoJSON(jalurevakuasi, {
+    style: {
+      color: "yellow", // Warna garis
+      weight: 2, // Ketebalan garis
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  jalurevakuasi.addTo(map);
+
+  //Menambahkan skala
+  var scale = L.control.scale({ position: "bottomright" });
+  scale.addTo(map);
+
+  /*Plugin Mouse Position Coordinate */
+  L.control
+    .mousePosition({
+      position: "bottomright",
+      separator: ",",
+      prefix: "Koordinat : ",
+    })
+    .addTo(map);
+  /*Plugin Measurement Tool */
+  var measureControl = new L.Control.Measure({
+    position: "topleft",
+    primaryLengthUnit: "meters",
+    secondaryLengthUnit: "kilometers",
+    primaryAreaUnit: "hectares",
+    secondaryAreaUnit: "sqmeters",
+    activeColor: "#FF0000",
+    completedColor: "#00FF00",
+  });
+  measureControl.addTo(map);
+
+  /*Plugin EasyPrint */
+  L.easyPrint({
+    title: "Print",
+  }).addTo(map);
+
+  //Geocoder
+  var geocoder = L.Control.Geocoder.nominatim();
+
+  var routeControl = L.Routing.control({
+    waypoints: [null],
+    geocoder: geocoder,
+    addWaypoints: true,
+    show: true,
+    draggableWaypoints: true,
+    routeWhileDragging: true,
+    reverseWaypoints: true,
+    autoToute: true,
+    showAlternatives: true,
+    altLineOptions: {
+      styles: [
+        { color: "black", opacity: 0.15, weight: 9 },
+        { color: "white", opacity: 0.8, weight: 6 },
+        { color: "blue", opacity: 0.5, weight: 2 },
+      ],
+    },
+    waypointNameFallback: function (latLng) {
+      function zeroPad(n) {
+        n = Math.round(n);
+        return n < 10 ? "0" + n : n;
+      }
+      function sexagesimal(p, pos, neg) {
+        var n = Math.abs(p),
+          degs = Math.floor(n),
+          mins = (n - degs) * 60,
+          secs = (mins - Math.floor(mins)) * 60,
+          frac = Math.round((secs - Math.floor(secs)) * 100);
+        return (
+          (n >= 0 ? pos : neg) +
+          degs +
+          "Â°" +
+          zeroPad(mins) +
+          "'" +
+          zeroPad(secs) +
+          "." +
+          zeroPad(frac) +
+          '"'
+        );
+      }
+      return (
+        sexagesimal(latLng.lat, "N", "S") +
+        " " +
+        sexagesimal(latLng.lng, "E", "W")
+      );
+    },
+    show: true,
+  })
+    .on("routingerror", function (e) {
+      try {
+        map.getCenter();
+      } catch (e) {
+        map.fitBounds(
+          L.latLngBounds(
+            routeControl.getWaypoints().map(function (wp) {
+              return wp.latLng;
+            })
+          )
+        );
+      }
+      //handleError(e);
+      //console.log(e);
+    })
+    .addTo(map);
+
+  routeControl.spliceWaypoints(0, 2);
+  //console.log(routeControl.getWaypoints().length);
+  routeControl.setWaypoints([]);
+  //console.log(routeControl.getWaypoints().length);
+
+  /*Legend specific*/
+  var legend = L.control({ position: "bottomleft" });
+
+  legend.onAdd = function (map) {
+    var div = L.DomUtil.create("div", "legend");
+    div.innerHTML += "<h4>Kelas</h4>";
+    div.innerHTML += '<i style="background: #1c4710"></i><span>Rendah</span><br>';
+    div.innerHTML += '<i style="background: #a3c829"></i><span>Sedang</span><br>';
+    div.innerHTML += '<i style="background: #c31919"></i><span>Tinggi</span><br>';
+    return div;
+  };
+
+  legend.addTo(map);
+</script>

@@ -1,0 +1,10 @@
+var Fas_Kesehatan={
+"type": "FeatureCollection",
+"name": "Fas_Kesehatan",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Id": 0 }, "geometry": { "type": "Point", "coordinates": [ 116.12281539927946, -8.627392420329798 ] } },
+{ "type": "Feature", "properties": { "Id": 0 }, "geometry": { "type": "Point", "coordinates": [ 116.13409733904366, -8.626022548725546 ] } },  
+{ "type": "Feature", "properties": { "Id": 0 }, "geometry": { "type": "Point", "coordinates": [ 116.136192887685013, -8.626531610653258 ] } }
+]
+}

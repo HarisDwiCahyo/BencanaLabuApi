@@ -1,0 +1,15 @@
+var titiksementara={
+"type": "FeatureCollection",
+"name": "Titik Kumpul Sementara",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "OID_": 0, "Name": "Titik Kumpul Sementara", "FolderPath": "Titik Kumpul.kmz/Titik Cahyo", "SymbolID": 0, "AltMode": -1, "Base": 0.0, "Snippet": null, "PopupInfo": null, "HasLabel": -1, "LabelID": 0, "Keterangan": "Lapangan Voli" }, "geometry": { "type": "Point", "coordinates": [ 116.130560261000028, -8.626985268999933, 0.0 ] } },
+{ "type": "Feature", "properties": { "OID_": 0, "Name": "Titik Kumpul Sementara", "FolderPath": "Titik Kumpul.kmz/Titik Cahyo", "SymbolID": 0, "AltMode": -1, "Base": 0.0, "Snippet": null, "PopupInfo": null, "HasLabel": -1, "LabelID": 0, "Keterangan": "SD N 2 Bagik Polak" }, "geometry": { "type": "Point", "coordinates": [ 116.139176577000043, -8.62655247799996, 0.0 ] } },
+{ "type": "Feature", "properties": { "OID_": 0, "Name": "Titik Kumpul Sementara", "FolderPath": "Titik Kumpul.kmz/Titik Cahyo", "SymbolID": 0, "AltMode": -1, "Base": 0.0, "Snippet": null, "PopupInfo": null, "HasLabel": -1, "LabelID": 0, "Keterangan": "SD N 1 Bagik Polak" }, "geometry": { "type": "Point", "coordinates": [ 116.135250850000034, -8.626444165999947, 0.0 ] } },
+{ "type": "Feature", "properties": { "OID_": 0, "Name": "Titik Kumpul Sementara", "FolderPath": "Titik Kumpul.kmz/Titik Cahyo", "SymbolID": 0, "AltMode": -1, "Base": 0.0, "Snippet": null, "PopupInfo": null, "HasLabel": -1, "LabelID": 0, "Keterangan": "Masjid Al Hakim" }, "geometry": { "type": "Point", "coordinates": [ 116.131906314000034, -8.630506537999967, 0.0 ] } },
+{ "type": "Feature", "properties": { "OID_": 0, "Name": "Titik Kumpul Sementara", "FolderPath": "Titik Kumpul.kmz/Titik Cahyo", "SymbolID": 0, "AltMode": -1, "Base": 0.0, "Snippet": null, "PopupInfo": null, "HasLabel": -1, "LabelID": 0, "Keterangan": "Masjid Kebon Barat" }, "geometry": { "type": "Point", "coordinates": [ 116.132086545000107, -8.627196741999974, 0.0 ] } },
+{ "type": "Feature", "properties": { "OID_": 0, "Name": "Titik Kumpul Sementara", "FolderPath": "Titik Kumpul.kmz/Titik Cahyo", "SymbolID": 0, "AltMode": -1, "Base": 0.0, "Snippet": null, "PopupInfo": null, "HasLabel": -1, "LabelID": 0, "Keterangan": "Perumahan Green Asia" }, "geometry": { "type": "Point", "coordinates": [ 116.134998324000094, -8.625593434999924, 0.0 ] } },
+{ "type": "Feature", "properties": { "OID_": 0, "Name": "Titik Kumpul Sementara", "FolderPath": null, "SymbolID": 0, "AltMode": 0, "Base": 0.0, "Snippet": null, "PopupInfo": null, "HasLabel": 0, "LabelID": 0, "Keterangan": "Masjid Nurul Huda" }, "geometry": { "type": "Point", "coordinates": [ 116.138062355580971, -8.626218277182838, 0.0 ] } },
+{ "type": "Feature", "properties": { "OID_": 0, "Name": "Titik Kumpul Sementara", "FolderPath": null, "SymbolID": 0, "AltMode": 0, "Base": 0.0, "Snippet": null, "PopupInfo": null, "HasLabel": 0, "LabelID": 0, "Keterangan": "Masjid Sullamul Munajat Rerot" }, "geometry": { "type": "Point", "coordinates": [ 116.137842812797359, -8.628815247262702, 0.0 ] } }
+]
+}
