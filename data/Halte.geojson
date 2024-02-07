@@ -1,0 +1,8 @@
+var halte={
+"type": "FeatureCollection",
+"name": "Halte",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Id": 0 }, "geometry": { "type": "Point", "coordinates": [ 116.136161948466324, -8.626752521166022 ] } }
+]
+}

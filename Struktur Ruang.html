@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="author" content="DIVSIG UGM" />
+  <meta name="description" content="leaflet basic" />
+
+  <!--titler-->
+  <title>Potensi Kebencanan Desa Bagik Polak</title>
+
+  <!--leafllet JS-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+  <!--bootsrap-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+    integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!--button search-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+  <!-- Leaflet Measure CSS Library -->
+  <link rel="stylesheet" href="Asset/plugins/leaflet-measure/leaflet-measure.css" />
+
+  <!-- Search CSS Library -->
+  <link rel="stylesheet" href="Asset/plugins/leaflet-search/leaflet-search.css" />
+
+  <!-- Geolocation CSS Library for Plugin -->
+  <link rel="stylesheet"
+    href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css" />
+
+  <!-- Leaflet Mouse Position CSS Library -->
+  <link rel="stylesheet" href="Asset/plugins/leaflet-mouseposition/L.Control.MousePosition.css" />
+
+  <!-- EasyPrint CSS Library -->
+  <link rel="stylesheet" href="Asset/plugins/leaflet-easyprint/easyPrint.css" />
+
+  <!--Routing CSS Library-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+  <!-- Tab browser icon -->
+  <link rel="icon" type="image/x-icon" href="http://luk.staff.ugm.ac.id/logo/UGM/Resmi/Warna.gif" />
+
+  <!--link font-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Lato&family=Roboto+Mono:wght@700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+    integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="p-1 mb-2 bg-light border">
+            <div class="panel panel-default">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-6">
+                    <a href="Bencana Labu Api.html">
+                      <div class="p-1 mb-2 border text-center text-success">
+                        <span class="badge text-bg-danger fw-bold fs-6 font-monospace"
+                          style="color: #fff; font-size: 50px; background-color: #dc3545">Peta Potensi Bencana Desa
+                          Bagik Polak</span>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-6">
+                    <a href="Struktur Ruang.html">
+                      <div class="p-1 mb-2 border text-center text-success">
+                        <span class="badge text-bg-success fw-semibold fs-6 font-monospace"
+                          style="color: #000; font-size: 50px">Peta Struktur Ruang Desa Bagik Polak</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div id="map"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Information Section -->
+
+        <div class="col-md-3">
+          <div>
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+              <!-- Administrasi Wilayah -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                    aria-controls="panelsStayOpen-collapseOne">
+                    Administrasi Wilayah
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked />
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Batas Desa Bagik Polak
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--Transportasi -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseTwo">
+                    Transportasi
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="PTTransportasi" checked />
+                      <label class="form-check-label" for="PTTransportasi">
+                        PT Transportasi
+                      </label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="Halte" checked />
+                        <label class="form-check-label" for="Halte">
+                          Halte
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="LNTransportasi" checked />
+                      <label class="form-check-label" for="LNTransportasi">
+                        LN Transportasi
+                      </label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="JalanLokal" checked />
+                        <label class="form-check-label" for="JalanLokal">
+                          Jalan Lokal
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="JalanLain" checked />
+                        <label class="form-check-label" for="JalanLain">
+                          Jalan Lain
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="JalanGang" checked />
+                        <label class="form-check-label" for="JalanGang">
+                          Jalan Gang
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="JalanPerumahan" checked />
+                        <label class="form-check-label" for="JalanPerumahan">
+                          Jalan Perumahan
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Prasaranan Lain -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseThree">
+                    Prasaranan Lain
+                  </button>
+                </h2>
+
+                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="PTPrasarana" checked />
+                      <label class="form-check-label" for="PTPrasarana">
+                        PT Prasarana Lain
+                      </label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="TitikAkhir" checked />
+                        <label class="form-check-label" for="TitikAkhir">
+                          Tempat Evakuasi Akhir
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="TitikSementara" checked />
+                        <label class="form-check-label" for="TitikSementara">
+                          Tempat Evakuasi Sementara
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="LNPrasarana" checked />
+                      <label class="form-check-label" for="LNPrasarana">
+                        LN Prasaranan Lain
+                      </label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="JalurEvakuasi" checked />
+                        <label class="form-check-label" for="JalurEvakuasi">
+                          Jalur Evakuasi
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Bahaya -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseFour">
+                    Pusat Pelayanan
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="PTPusatPelayanan" checked/>
+                      <label class="form-check-label" for="PTPusatPelayanan">
+                        PT Pusat Pelayanan
+                      </label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="PusatLingkunganDesa" checked />
+                        <label class="form-check-label" for="PusatLingkunganDesa">
+                          Pusat Lingkungan Kelurahan/Desa
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Kerentanan -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseFive">
+                    Telekomunikasi
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="PTTelekomunikasi" checked/>
+                      <label class="form-check-label" for="PTTelekomunikasi">
+                        PT Telekomunikasi
+                      </label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="BTS" checked />
+                        <label class="form-check-label" for="BTS">
+                          Menara Base Transceiver Station (BTS)
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Drainase-->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseSix">
+                    Drainase
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="LNDrainase" checked />
+                      <label class="form-check-label" for="LNDrainase">
+                        LN Drainase
+                      </label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="DrainaseSekunder" checked />
+                        <label class="form-check-label" for="DrainaseSekunder">
+                          Jaringan Drainase Sekunder
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="DrainaseTersier" checked />
+                        <label class="form-check-label" for="DrainaseTersier">
+                          Jaringan Drainase Tersier
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Energi-->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseSeven">
+                    Energi
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="LNEnergi" checked/>
+                      <label class="form-check-label" for="LNEnergi">
+                        LN Energi
+                      </label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="SUTR" checked/>
+                        <label class="form-check-label" for="SUTR">
+                          Saluran Udara Tegangan Rendah (SUTR)
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add more information as needed -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Leaflet JS-->
+    <script src=" https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!--bootsrap-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
+      integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Leaflet Measure JavaScript Library -->
+    <script src="Asset/plugins/leaflet-measure/leaflet-measure.js"></script>
+
+    <!-- Search JavaScript Library -->
+    <script src="Asset/plugins/leaflet-search/leaflet-search.js"></script>
+
+    <!-- Geolocation Javascript Library -->
+    <script
+      src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
+
+    <!-- Leaflet Mouse Position JavaScript Library -->
+    <script src="Asset/plugins/leaflet-mouseposition/L.Control.MousePosition.js"></script>
+
+    <!-- EasyPrint JavaScript Library -->
+    <script src="Asset/plugins/leaflet-easyprint/leaflet.easyPrint.js"></script>
+
+    <!--Routing JavaScript Library-->
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
+
+    <!--g-->
+    <script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!--Geocode dan marker cluster-->
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="./dist/leaflet.markercluster.js"></script>
+</body>
+
+</html>
+<script src="data/Bahaya_Banjir.geojson"></script>
+<script src="data/Admin_Desa_Bagik_Polak.geojson"></script>
+<script src="data/Halte.geojson"></script>
+<script src="data/Titik Kumpul Sementara.geojson"></script>
+<script src="data/Titik Kumpul Akhir.geojson"></script>
+<script src="data/PusatPelayanan.geojson"></script>
+<script src="data/BTS.geojson"></script>
+<script src="data/SUTR.geojson"></script>
+<script src="data/DrainaseSekunder.geojson"></script>
+<script src="data/DrainaseTersier.geojson"></script>
+<script src="data/Jalur Evakuasi.geojson"></script>
+<script src="data/Gang_Bagik_Polak.geojson"></script>
+<script src="data/Jalan_Lain_BagikPolak.geojson"></script>
+<script src="data/Jalan_Lokal_BagikPolak.geojson"></script>
+<script src="data/Jalan_Perumahan_BagikPolak.geojson"></script>
+
+<script>
+  //Layer OSM
+
+  var map = L.map("map").setView([-8.627266140997959, 116.13555872405716], 16);
+  var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  });
+
+  var CartoDB_DarkMatter = L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: "abcd",
+      maxZoom: 19,
+    }
+  );
+
+  // Google Map Layer
+
+  googleStreets = L.tileLayer(
+    "http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+    {
+      maxZoom: 20,
+      subdomains: ["mt0", "mt1", "mt2", "mt3"],
+    }
+  );
+
+  // Satelite Layer
+  googleSat = L.tileLayer("http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
+    maxZoom: 20,
+    subdomains: ["mt0", "mt1", "mt2", "mt3"],
+  });
+  googleSat.addTo(map);
+
+  var Stamen_Watercolor = L.tileLayer(
+    "https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}",
+    {
+      attribution:
+        'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      subdomains: "abcd",
+      minZoom: 1,
+      maxZoom: 16,
+      ext: "jpg",
+    }
+  );
+
+  //Layer control
+
+  var baseMaps = {
+    Satellite: googleSat,
+    "Google Map": googleStreets,
+    "Water Color": Stamen_Watercolor,
+    OpenStreetMap: osm,
+    DarkMatter: CartoDB_DarkMatter,
+  };
+
+  L.control.layers(baseMaps).addTo(map);
+
+  // Admin Desa Bagik Polak
+  var checkbox = document.getElementById("flexCheckDefault");
+  checkbox.addEventListener("change", function () {
+    if (checkbox.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      admin_bagikpolak.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(admin_bagikpolak);
+    }
+  });
+
+  // PT Transportasi
+  var checkboxpttransportasi = document.getElementById("PTTransportasi");
+  checkboxpttransportasi.addEventListener("change", function () {
+    if (checkboxpttransportasi.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Halte.addTo(map);
+      checkboxhalte.checked = true;
+
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Halte);
+      checkboxhalte.checked = false;
+    }
+  });
+  var checkboxhalte = document.getElementById("Halte");
+  checkboxhalte.addEventListener("change", function () {
+    if (checkboxhalte.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Halte.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Halte);
+    }
+  });
+
+  // LN Transportasi
+  var checkboxlntransportasi = document.getElementById("LNTransportasi");
+  checkboxlntransportasi.addEventListener("change", function () {
+    if (checkboxlntransportasi.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Jalan_Gang.addTo(map);
+      Jalan_Lain.addTo(map);
+      Jalan_Lokal.addTo(map);
+      Jalan_Perumahan.addTo(map);
+      gang.checked = true;
+      lain.checked = true;
+      lokal.checked = true;
+      perumahan.checked = true;
+
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Jalan_Gang);
+      map.removeLayer(Jalan_Lain);
+      map.removeLayer(Jalan_Lokal);
+      map.removeLayer(Jalan_Perumahan);
+      gang.checked = false;
+      lain.checked = false;
+      lokal.checked = false;
+      perumahan.checked = false;
+    }
+  });
+
+  // Jalan Gang
+  var gang = document.getElementById("JalanGang");
+  gang.addEventListener("change", function () {
+    if (gang.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Jalan_Gang.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Jalan_Gang);
+    }
+  });
+
+  // Jalan Lain
+  var lain = document.getElementById("JalanLain");
+  lain.addEventListener("change", function () {
+    if (lain.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Jalan_Lain.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Jalan_Lain);
+    }
+  });
+
+  // Jalan Lokal
+  var lokal = document.getElementById("JalanLokal");
+  lokal.addEventListener("change", function () {
+    if (lokal.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Jalan_Lokal.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Jalan_Lokal);
+    }
+  });
+
+  // Jalan Perumahan
+  var perumahan = document.getElementById("JalanPerumahan");
+  perumahan.addEventListener("change", function () {
+    if (perumahan.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      Jalan_Perumahan.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(Jalan_Perumahan);
+    }
+  });
+
+  // PT Prasarana Lain
+  var checkboxptlain = document.getElementById("PTPrasarana");
+  checkboxptlain.addEventListener("change", function () {
+    if (checkboxptlain.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      titiksementara.addTo(map);
+      titikakhir.addTo(map);
+      checkboxsementara.checked = true;
+      checkboxakhir.checked = true;
+
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(titiksementara);
+      map.removeLayer(titikakhir);
+      checkboxsementara.checked = false;
+      checkboxakhir.checked = false;
+    }
+  });
+
+  // Titik  Kumpul Sementara
+  var checkboxsementara = document.getElementById("TitikSementara");
+  checkboxsementara.addEventListener("change", function () {
+    if (checkboxsementara.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      titiksementara.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(titiksementara);
+    }
+  });
+
+  // Titik  Akhir
+  var checkboxakhir = document.getElementById("TitikAkhir");
+  checkboxakhir.addEventListener("change", function () {
+    if (checkboxakhir.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      titikakhir.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(titikakhir);
+    }
+  });
+
+  //LN Prasarana Lain
+  var checkboxLNlain = document.getElementById("LNPrasarana");
+  checkboxLNlain.addEventListener("change", function () {
+    if (checkboxLNlain.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      jalurevakuasi.addTo(map);
+      checkboxevakuasi.checked = true;
+      
+
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(jalurevakuasi);
+      checkboxevakuasi.checked = false;
+      
+    }
+  });
+
+  // Jalur Evakuasi
+  var checkboxevakuasi = document.getElementById("JalurEvakuasi");
+  checkboxevakuasi.addEventListener("change", function () {
+    if (checkboxevakuasi.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      jalurevakuasi.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(jalurevakuasi);
+    }
+  });
+
+  //PT Pusat Pelayanan
+  var checkboxPTPelayanan = document.getElementById("PTPusatPelayanan");
+  checkboxPTPelayanan.addEventListener("change", function () {
+    if (checkboxPTPelayanan.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      PusatPelayanan.addTo(map);
+      checkboxDesa.checked = true;
+      
+
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(PusatPelayanan);
+      checkboxDesa.checked = false;
+      
+    }
+  });
+
+  // Pusat Lingkungan Desa
+  var checkboxDesa = document.getElementById("PusatLingkunganDesa");
+  checkboxDesa.addEventListener("change", function () {
+    if (checkboxDesa.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      PusatPelayanan.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(PusatPelayanan);
+    }
+  });
+
+  //PT Telekomunikasi
+  var checkboxPTTelekomunikasi = document.getElementById("PTTelekomunikasi");
+  checkboxPTTelekomunikasi.addEventListener("change", function () {
+    if (checkboxPTTelekomunikasi.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      BTS.addTo(map);
+      checkboxTelekomunikasi.checked = true;
+      
+
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(BTS);
+      checkboxTelekomunikasi.checked = false;
+      
+    }
+  });
+
+  // Pusat Lingkungan Desa
+  var checkboxTelekomunikasi = document.getElementById("BTS");
+  checkboxTelekomunikasi.addEventListener("change", function () {
+    if (checkboxTelekomunikasi.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      BTS.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(BTS);
+    }
+  });
+
+  //LN Drainase
+  var checkboxLNDrainase = document.getElementById("LNDrainase");
+  checkboxLNDrainase.addEventListener("change", function () {
+    if (checkboxLNDrainase.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      DrainaseSekunder.addTo(map);
+      DrainaseTersier.addTo(map);
+      checkboxSekunder.checked = true;
+      checkboxTersier.checked = true;
+      
+
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(DrainaseSekunder);
+      map.removeLayer(DrainaseTersier);
+      checkboxSekunder.checked = false;
+      checkboxTersier.checked = false;
+            
+    }
+  });
+
+  // DrainaseSekunder
+  var checkboxSekunder = document.getElementById("DrainaseSekunder");
+  checkboxSekunder.addEventListener("change", function () {
+    if (checkboxSekunder.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      DrainaseSekunder.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(DrainaseSekunder);
+    }
+  });
+
+  // DrainaseTersier
+  var checkboxTersier = document.getElementById("DrainaseTersier");
+  checkboxTersier.addEventListener("change", function () {
+    if (checkboxTersier.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      DrainaseTersier.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(DrainaseTersier);
+    }
+  });
+
+
+  //LN Energi
+  var checkboxLNEnergi = document.getElementById("LNEnergi");
+  checkboxLNEnergi.addEventListener("change", function () {
+    if (checkboxLNEnergi.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      SUTR.addTo(map);
+      checkboxSUTR.checked = true;
+      
+
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(SUTR);
+      checkboxSUTR.checked = false;
+            
+    }
+  });
+
+  // DrainaseSekunder
+  var checkboxSUTR = document.getElementById("SUTR");
+  checkboxSUTR.addEventListener("change", function () {
+    if (checkboxSUTR.checked) {
+      // Checkbox dicentang, tampilkan layer GeoJSON
+      SUTR.addTo(map);
+    } else {
+      // Checkbox tidak dicentang, hilangkan layer GeoJSON
+      map.removeLayer(SUTR);
+    }
+  });
+
+// -------------------------------------------------------------------------------------------------------------//
+  // Menambahkan data administrasi dan mengatur gaya dengan garis tepi putus-putus
+  var admin_bagikpolak = L.geoJSON(admin_bagikpolak, {
+    style: function (feature) {
+      return {
+        fillColor: "transparent",
+        color: "white",
+        weight: 2,
+        dashArray: "5, 5", // Mengatur pola putus-putus
+      };
+    },
+  }).addTo(map);
+
+  //Halte
+  var IconHalte = new L.Icon({
+    iconUrl: "Asset/img/marker/busstop.png",
+    iconSize: [27, 27],
+  });
+
+  var Halte = L.geoJSON(halte, {
+    pointToLayer: function (feature, latlng) {
+      var marker = L.marker(latlng, { icon: IconHalte });
+      return marker;
+    },
+  }).addTo(map);
+
+  // Menambahkan data gang
+  var Jalan_Gang = L.geoJSON(Jalan_Gang, {
+    style: {
+      color: "red", // Warna garis
+      weight: 2, // Ketebalan garis
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  Jalan_Gang.addTo(map);
+
+
+  // Menambahkan data jalan lain
+  var Jalan_Lain = L.geoJSON(Jalan_Lain, {
+    style: {
+      color: "red", // Warna garis
+      weight: 2, // Ketebalan garis
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  Jalan_Lain.addTo(map);
+
+  // Menambahkan data jalan Lokal
+  var Jalan_Lokal = L.geoJSON(Jalan_Lokal, {
+    style: {
+      color: "red", // Warna garis
+      weight: 2, // Ketebalan garis
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  Jalan_Lokal.addTo(map);
+
+  // Menambahkan data jalan Perumahan
+  var Jalan_Perumahan = L.geoJSON(Jalan_Perumahan, {
+    style: {
+      color: "red", // Warna garis
+      weight: 2, // Ketebalan garis
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  Jalan_Perumahan.addTo(map);
+
+  //Titik Kumpul Sementara
+  var IconSementara = new L.Icon({
+    iconUrl: "Asset/img/marker/titiksementara.png",
+    iconSize: [23, 23],
+  });
+
+  var titiksementara = L.geoJSON(titiksementara, {
+    pointToLayer: function (feature, latlng) {
+      var marker = L.marker(latlng, { icon: IconSementara });
+      marker.bindPopup(`
+      <form id="regForm" action="">
+        <h6>${feature.properties.Name}</h6>
+        <table>
+          <tr>
+            <th>Keterangan</th>
+            <td>: ${feature.properties.Keterangan}</td>
+          </tr>
+        </table>
+        <br>
+      </form>
+    `);
+      return marker;
+    },
+  }).addTo(map);
+
+  //Titik Kumpul Akhir
+  var IconAkhir = new L.Icon({
+    iconUrl: "Asset/img/marker/titikakhir.png",
+    iconSize: [23, 23],
+  });
+
+  var titikakhir = L.geoJSON(titikakhir, {
+    pointToLayer: function (feature, latlng) {
+      var marker = L.marker(latlng, { icon: IconAkhir });
+      marker.bindPopup(`
+      <form id="regForm" action="">
+        <h6>${feature.properties.Name}</h6>
+        <table>
+          <tr>
+            <th>Keterangan</th>
+            <td>: ${feature.properties.Keterangan}</td>
+          </tr>
+        </table>
+        <br>
+      </form>
+    `);
+      return marker;
+    },
+  }).addTo(map);
+
+  // Menambahkan data resiko tsunami (data line)
+  var jalurevakuasi = L.geoJSON(jalurevakuasi, {
+    style: {
+      color: "yellow", // Warna garis
+      weight: 2, // Ketebalan garis
+      opacity: 1,
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  jalurevakuasi.addTo(map);
+
+   //Halte
+   var IconLayanan = new L.Icon({
+    iconUrl: "Asset/img/marker/pelayanan.png",
+    iconSize: [22, 22],
+  });
+
+  var PusatPelayanan = L.geoJSON(PusatPelayanan, {
+    pointToLayer: function (feature, latlng) {
+      var marker = L.marker(latlng, { icon: IconLayanan });
+      return marker;
+    },
+  }).addTo(map);
+
+  //BTS
+  var IconBTS = new L.Icon({
+    iconUrl: "Asset/img/marker/BTS.png",
+    iconSize: [22, 22],
+  });
+
+  var BTS = L.geoJSON(BTS, {
+    pointToLayer: function (feature, latlng) {
+      var marker = L.marker(latlng, { icon: IconBTS });
+      return marker;
+    },
+  }).addTo(map);
+
+  // Drainase Sekunder
+  var DrainaseSekunder = L.geoJSON(DrainaseSekunder, {
+    style: {
+      color: "lightblue", // Warna garis
+      weight: 3, // Ketebalan garis
+      
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  DrainaseSekunder.addTo(map);
+
+  // Drainase Tersier
+  var DrainaseTersier = L.geoJSON(DrainaseTersier, {
+    style: {
+      color: "lightblue", // Warna garis
+      weight: 2, // Ketebalan garis
+      
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  DrainaseTersier.addTo(map);
+
+  // Jaringan Energi
+  var SUTR = L.geoJSON(SUTR, {
+    style: {
+      color: "lightgreen", // Warna garis
+      weight: 2, // Ketebalan garis
+      
+    },
+  });
+  // Menambahkan layer garis dan panah ke peta
+  SUTR.addTo(map);
+
+// -----------------------------------------------------------------------------------------------------------------------------------//
+  //Menambahkan skala
+  var scale = L.control.scale({ position: "bottomright" });
+  scale.addTo(map);
+
+  /*Plugin Mouse Position Coordinate */
+  L.control
+    .mousePosition({
+      position: "bottomright",
+      separator: ",",
+      prefix: "Koordinat : ",
+    })
+    .addTo(map);
+  /*Plugin Measurement Tool */
+  var measureControl = new L.Control.Measure({
+    position: "topleft",
+    primaryLengthUnit: "meters",
+    secondaryLengthUnit: "kilometers",
+    primaryAreaUnit: "hectares",
+    secondaryAreaUnit: "sqmeters",
+    activeColor: "#FF0000",
+    completedColor: "#00FF00",
+  });
+  measureControl.addTo(map);
+
+  /*Plugin EasyPrint */
+  L.easyPrint({
+    title: "Print",
+  }).addTo(map);
+
+  //Geocoder
+  var geocoder = L.Control.Geocoder.nominatim();
+
+  var routeControl = L.Routing.control({
+    waypoints: [null],
+    geocoder: geocoder,
+    addWaypoints: true,
+    show: true,
+    draggableWaypoints: true,
+    routeWhileDragging: true,
+    reverseWaypoints: true,
+    autoToute: true,
+    showAlternatives: true,
+    altLineOptions: {
+      styles: [
+        { color: "black", opacity: 0.15, weight: 9 },
+        { color: "white", opacity: 0.8, weight: 6 },
+        { color: "blue", opacity: 0.5, weight: 2 },
+      ],
+    },
+    waypointNameFallback: function (latLng) {
+      function zeroPad(n) {
+        n = Math.round(n);
+        return n < 10 ? "0" + n : n;
+      }
+      function sexagesimal(p, pos, neg) {
+        var n = Math.abs(p),
+          degs = Math.floor(n),
+          mins = (n - degs) * 60,
+          secs = (mins - Math.floor(mins)) * 60,
+          frac = Math.round((secs - Math.floor(secs)) * 100);
+        return (
+          (n >= 0 ? pos : neg) +
+          degs +
+          "Â°" +
+          zeroPad(mins) +
+          "'" +
+          zeroPad(secs) +
+          "." +
+          zeroPad(frac) +
+          '"'
+        );
+      }
+      return (
+        sexagesimal(latLng.lat, "N", "S") +
+        " " +
+        sexagesimal(latLng.lng, "E", "W")
+      );
+    },
+    show: true,
+  })
+    .on("routingerror", function (e) {
+      try {
+        map.getCenter();
+      } catch (e) {
+        map.fitBounds(
+          L.latLngBounds(
+            routeControl.getWaypoints().map(function (wp) {
+              return wp.latLng;
+            })
+          )
+        );
+      }
+      //handleError(e);
+      //console.log(e);
+    })
+    .addTo(map);
+
+  routeControl.spliceWaypoints(0, 2);
+  //console.log(routeControl.getWaypoints().length);
+  routeControl.setWaypoints([]);
+  //console.log(routeControl.getWaypoints().length);
+</script>

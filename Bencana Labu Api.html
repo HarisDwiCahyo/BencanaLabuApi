@@ -65,10 +65,27 @@
         <div class="col-md-9">
           <div class="p-1 mb-2 bg-light border">
             <div class="panel panel-default">
-              <div class="p-1 mb-2 border text-center text-success">
-                <span class="badge text-bg-success fw-semibold fs-6 font-monospace"
-                  style="color: #000; font-size: 50px">Peta Potensi Bencana Desa Bagik Polak</span>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-6">
+                    <a href="Bencana Labu Api.html">
+                      <div class="p-1 mb-2 border text-center text-success">
+                        <span class="badge text-bg-success fw-bold fs-6 font-monospace"
+                          style="color: #fff; font-size: 50px; background-color: #dc3545">Peta Potensi Bencana Desa Bagik Polak</span>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-md-6">
+                    <a href="Struktur Ruang.html">
+                      <div class="p-1 mb-2 border text-center text-success">
+                        <span class="badge text-bg-danger fw-semibold fs-6 font-monospace"
+                          style="color: #000; font-size: 50px">Peta Struktur Ruang Desa Bagik Polak</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
               </div>
+              
               <div id="map"></div>
             </div>
           </div>
@@ -788,7 +805,7 @@
       Jalan_Lokal.addTo(map);
     } else {
       // Checkbox tidak dicentang, hilangkan layer GeoJSON
-      map.removeLayer(Jalan_Lokal);
+      map.removeLayer(Jalan_Lokal);  
     }
   });
 
@@ -1254,7 +1271,7 @@
 
   //Titik Kumpul Sementara
   var Icon1 = new L.Icon({
-    iconUrl: "Asset/img/marker/gathering.png",
+    iconUrl: "Asset/img/marker/titiksementara.png",
     iconSize: [23, 23],
   });
 
@@ -1279,7 +1296,7 @@
 
   //Titik Kumpul Akhir
   var Icon2 = new L.Icon({
-    iconUrl: "Asset/img/marker/assembly-point.png",
+    iconUrl: "Asset/img/marker/titikakhir.png",
     iconSize: [23, 23],
   });
 

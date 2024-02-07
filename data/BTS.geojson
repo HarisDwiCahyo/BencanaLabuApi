@@ -1,0 +1,8 @@
+var BTS={
+"type": "FeatureCollection",
+"name": "BTS",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Id": 0 }, "geometry": { "type": "Point", "coordinates": [ 116.139485992234953, -8.626282185397216 ] } }
+]
+}
